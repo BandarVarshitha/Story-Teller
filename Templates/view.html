@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css">
+
+  
+</head>
+
+<body>
+
+    <!-- Header -->
+    <nav class="header navbar navbar-expand-lg navbar-light ">
+        <div class="container d-flex justify-content-center"  >
+          <a class="navbar-brand text-white fs-2 h1" href="#">Endless Tales & Adventures</a>
+        </div>
+      </nav>
+
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav  d-flex justify-content-end"> <!-- Added 'mx-auto' to center the items -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('index')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('add_story')}}">Create</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('report')}}">Report</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('search')}}">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('account')}}">Change Password</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+            <h1 class="text-center mb-3">The Lion and the Mouse</h1>
+            <img src="../static/images/The-Lion-and-the-Mouse-story.webp"  alt=""  style="width:70%; height:500px" class="mx-auto d-block">
+            <p class="mt-3">A lion was once sleeping in the jungle when a mouse started running up and down his body just for fun.
+                 This disturbed the lion’s sleep, and he woke up quite angry. He was about to eat the mouse when the mouse 
+                 desperately requested the lion to set him free. “I promise you, I will be of great help to you someday if you save me.” 
+                 The lion laughed at the mouse’s confidence and let him go.
+            </p>
+            <p>
+                One day, a few hunters came into the forest and took the lion with them. They tied him up against a tree.
+                 The lion was struggling to get out and started to whimper. Soon, the mouse walked past and noticed the lion in trouble. 
+                 Quickly, he ran and gnawed on the ropes to set the lion free. Both of them sped off into the jungle.
+            </p>
+            <h3>Moral</h3>
+            <p>A small act of kindness can go a long way.</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer text-center p-2 mt-3">
+        <p>&copy;2024 CopyRight: Online story teller.com</p>
+    </div>
+
+    <!-- Include Bootstrap 5 JS Bundle without Integrity Hash (For Testing) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css">
+
+    <!-- <style>
+        .navbar {
+            padding:10px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #8f2afa;
+        }
+
+        .nav-link:hover {
+            color:black;
+        }
+
+        .navbar-nav {
+            flex-grow: 1;
+            justify-content: center; /* This centers the nav items */
+            gap:5%;
+            font-weight: bold;
+        }
+        .header{
+            background-color: #8f2afa;
+        }
+        .footer {
+            position:fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color:#8f2afa;
+            color: white;
+            text-align: center;
+        }
+    </style> -->
+</head>
+
+<body>
+
+    <!-- Header -->
+    <nav class="header navbar navbar-expand-lg navbar-light ">
+        <div class="container d-flex justify-content-center"  >
+          <a class="navbar-brand text-white fs-2 h1" href="#">Endless Tales & Adventures</a>
+        </div>
+      </nav>
+
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav  d-flex justify-content-end">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('index')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('add_story')}}">Create</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('report')}}">Report</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('search')}}">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('account')}}">Change Password</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div>
+        <form class="changepswd container box p-5 pt-1 col-lg-6" action="{{url_for('change_password')}}" method="POST" name="changePasswordForm">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Old Password</label>
+              <input type="password" class="form-control mt-1 mb-3" name="old_password" id="exampleFormControlInput1" >
+              <p id="oldError"></p>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput2">New Password</label>
+                <input type="password" class="form-control mt-1 mb-3" name="new_password" id="exampleFormControlInput2" >
+                <p id="newError"></p>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput3">Confirm Password</label>
+                <input type="password" class="form-control mt-1 mb-3" id="exampleFormControlInput3" >
+                <p id="confirmError"></p>
+            </div>
+        
+            <div class="d-flex justify-content-center mt-3">
+                <button type="submit" id="changepswd" class="btn text-center" style="background-color: #8f2afa;color:white">Submit</button>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer text-center p-2 mt-3">
+            <p>&copy;2024 CopyRight: Online story teller.com</p>
+        </div>
+        
+    <!-- Include Bootstrap 5 JS Bundle without Integrity Hash (For Testing) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+          <!-- <script>
+        document.getElementById("changepswd").addEventListener("click",function(event){
+            event.preventDefault()
+            const old=document.getElementsByClassName("form-control")[0].value;
+            const newpswd=document.getElementsByClassName("form-control")[1].value;
+            const confirm=document.getElementsByClassName("form-control")[2].value;
+            if(old === ""){
+                document.getElementById("oldError").style.display="block"
+                document.getElementById("oldError").textContent="password cannot be empty";
+                return false;
+            }
+            else if(old.length<8){
+                document.getElementById("oldError").style.display="block"
+                document.getElementById("oldError").textContent="password contains atlest 8 characters";
+                return false;
+
+            }else{
+                document.getElementById("oldError").style.display="none";
+            }
+
+            if(newpswd === ""){
+                document.getElementById("newError").style.display="block"
+                document.getElementById("newError").textContent="password cannot be empty";
+                return false;
+            }else if(newpswd.length<8){
+                document.getElementById("newError").style.display="block"
+                document.getElementById("newError").textContent="password contains atlest 8 characters";
+                return false;
+            }else{
+                document.getElementById("newError").style.display="none";
+            }
+
+            if(confirm === ""){
+                document.getElementById("confirmError").style.display="block"
+                document.getElementById("confirmError").textContent="password cannot be empty";
+                return false;
+            }else if(confirm.length<8){
+                document.getElementById("confirmError").style.display="block"
+                document.getElementById("confirmError").textContent="password contains atlest 8 characters";
+                return false;
+            }else if(!(newpswd===confirm)){
+                document.getElementById("confirmError").style.display="block"
+                document.getElementById("confirmError").textContent="passwords should match";
+                return false;
+            }else{
+                document.getElementById("confirmError").style.display="none";
+            }
+            return true;
+            
+        });
+    </script> -->
+    <script>
+        document.getElementById("changepswd").addEventListener("click", function(event) {
+            // Prevent form submission initially
+            //event.preventDefault();
+    
+            // Get values of the form fields
+            const old = document.getElementsByClassName("form-control")[0].value;
+            const newpswd = document.getElementsByClassName("form-control")[1].value;
+            const confirm = document.getElementsByClassName("form-control")[2].value;
+    
+            let isValid = true;
+    
+            // Old password validation
+            if (old === "") {
+                document.getElementById("oldError").style.display = "block";
+                document.getElementById("oldError").textContent = "Password cannot be empty";
+                isValid = false;
+            } else if (old.length < 8) {
+                document.getElementById("oldError").style.display = "block";
+                document.getElementById("oldError").textContent = "Password must contain at least 8 characters";
+                isValid = false;
+            } else {
+                document.getElementById("oldError").style.display = "none";
+            }
+    
+            // New password validation
+            if (newpswd === "") {
+                document.getElementById("newError").style.display = "block";
+                document.getElementById("newError").textContent = "Password cannot be empty";
+                isValid = false;
+            } else if (newpswd.length < 8) {
+                document.getElementById("newError").style.display = "block";
+                document.getElementById("newError").textContent = "Password must contain at least 8 characters";
+                isValid = false;
+            } else {
+                document.getElementById("newError").style.display = "none";
+            }
+    
+            // Confirm password validation
+            if (confirm === "") {
+                document.getElementById("confirmError").style.display = "block";
+                document.getElementById("confirmError").textContent = "Password cannot be empty";
+                isValid = false;
+            } else if (confirm.length < 8) {
+                document.getElementById("confirmError").style.display = "block";
+                document.getElementById("confirmError").textContent = "Password must contain at least 8 characters";
+                isValid = false;
+            } else if (newpswd !== confirm) {
+                document.getElementById("confirmError").style.display = "block";
+                document.getElementById("confirmError").textContent = "Passwords should match";
+                isValid = false;
+            } else {
+                document.getElementById("confirmError").style.display = "none";
+            }
+    
+            // If all validations pass, submit the form
+            if (isValid) {
+                document.forms["changePasswordForm"].submit();  // Change this form name as necessary
+            }else {
+                    event.preventDefault();  // If not valid, prevent form submission
+                }
+        });
+    </script>
+    
+</body>
+
+</html>

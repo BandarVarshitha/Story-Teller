@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Story</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <nav class="header navbar navbar-expand-lg navbar-light">
+        <div class="container d-flex justify-content-center">
+            <a class="navbar-brand text-white fs-2 h1" href="#">Endless Tales & Adventures</a>
+        </div>
+    </nav>
+
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-light" id="nav">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav  d-flex justify-content-end">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('index')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('add_story')}}">Create</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('report')}}">Report</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('search')}}">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('account')}}">Change Password</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    {% if data%}
+    <h3 class="text-center mt-4">Edit Your Story</h3>
+    <form class="container box p-5 pt-1 col-lg-6" action="{{ url_for('update_story') }}" method="POST">
+        <div class="form-group">
+            <input type="hidden" id="id" name="story_id"  class="form-control" value="{{data.story_id}}">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Title</label>
+            <input type="text" class="form-control mt-1 mb-3" name="title" value="{{data.title}}" id="exampleFormControlInput1">
+            <p id="titleError"></p>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect3">Genre</label>
+            <select class="form-control mt-1 mb-3" id="exampleFormControlSelect3" name="genre">
+                <option value=""></option>
+                <option value="action" selected>Action</option>
+                <option value="drama">Drama</option>
+                <option value="comedy">Comedy</option>
+                <option value="horror">Horror</option>
+                <option value="fiction">Fiction</option>
+                <option value="non fiction">Non Fiction</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Fable">Fable</option>
+
+
+            </select>
+            <p id="genreError"></p>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Story</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="story" rows="4">{{data.story}}</textarea>
+            <p id="storyError"></p>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea2">Summary</label>
+            <textarea class="form-control" id="exampleFormControlTextarea2" name="summary"  rows="3">{{data.summary}}</textarea>
+            <p id="summarError"></p>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea3">Moral</label>
+            <textarea class="form-control" id="exampleFormControlTextarea3" name="moral" value="" rows="2">{{data.moral}}</textarea>
+            <p id="moralError"></p>
+        </div>
+        <div class="d-flex justify-content-center mt-3">
+            <button type="submit" class="btn text-center" id="submit" style="background-color: #8f2afa;color:white">Update</button>
+        </div>
+        <!-- <button type="submit" class="btn btn-primary btn-block">Update</button> -->
+  </form>
+    {% else %}
+    <h3 class="text-center mt-4">Create Your Story</h3>
+    <form class="container box p-5 pt-1 col-lg-6" action="{{url_for('add_story')}}" method="POST">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Title</label>
+            <input type="text" class="form-control mt-1 mb-3" name="title" id="exampleFormControlInput1">
+            <p id="titleError"></p>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect3">Genre</label>
+            <select class="form-control mt-1 mb-3" id="exampleFormControlSelect3" name="genre">
+                <option value=""></option>
+                <option value="action">Action</option>
+                <option value="drama">Drama</option>
+                <option value="comedy">Comedy</option>
+                <option value="horror">Horror</option>
+                <option value="fiction">Fiction</option>
+                <option value="non fiction">Non Fiction</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Fable">Fable</option>
+
+
+
+            </select>
+            <p id="genreError"></p>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Story</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="story" rows="4"></textarea>
+            <p id="storyError"></p>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea2">Summary</label>
+            <textarea class="form-control" id="exampleFormControlTextarea2" name="summary" rows="3"></textarea>
+            <p id="summarError"></p>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea3">Moral</label>
+            <textarea class="form-control" id="exampleFormControlTextarea3" name="moral" rows="2"></textarea>
+            <p id="moralError"></p>
+        </div>
+        <div class="d-flex justify-content-center mt-3">
+            <button type="submit" class="btn text-center" id="submit" style="background-color: #8f2afa;color:white">Add
+                Story</button>
+        </div>
+    </form>
+    {% endif %}
+
+    <!-- Footer -->
+    <div class="footer text-center p-2 mt-3">
+        <p>&copy;2024 CopyRight: Online story teller.com</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.getElementById("submit").addEventListener("click", function (event) {
+            // event.preventDefault();  // Prevent default form submission until validation is complete
+
+            // Grab form field values
+            const title = document.getElementsByClassName("form-control")[0].value;
+            const genre = document.getElementsByClassName("form-control")[1].value;
+            const story = document.getElementsByClassName("form-control")[2].value;
+            const summary = document.getElementsByClassName("form-control")[3].value;
+            const moral = document.getElementsByClassName("form-control")[4].value;
+
+            let isValid = true;
+
+            // Validation checks for each field
+            if (title === "") {
+                document.getElementById("titleError").style.display = "block";
+                document.getElementById("titleError").textContent = "Title cannot be empty";
+                isValid = false;
+            } else {
+                document.getElementById("titleError").style.display = "none";
+            }
+
+            if (genre === "") {
+                document.getElementById("genreError").style.display = "block";
+                document.getElementById("genreError").textContent = "Genre cannot be empty";
+                isValid = false;
+            } else {
+                document.getElementById("genreError").style.display = "none";
+            }
+
+            if (story === "") {
+                document.getElementById("storyError").style.display = "block";
+                document.getElementById("storyError").textContent = "Story cannot be empty";
+                isValid = false;
+            } else {
+                document.getElementById("storyError").style.display = "none";
+            }
+
+            if (summary === "") {
+                document.getElementById("summarError").style.display = "block";
+                document.getElementById("summarError").textContent = "Summary cannot be empty";
+                isValid = false;
+            } else {
+                document.getElementById("summarError").style.display = "none";
+            }
+
+            if (moral === "") {
+                document.getElementById("moralError").style.display = "block";
+                document.getElementById("moralError").textContent = "Moral cannot be empty";
+                isValid = false;
+            } else {
+                document.getElementById("moralError").style.display = "none";
+            }
+
+            // If all fields are valid, submit the form
+            if (isValid) {
+                document.querySelector("form").submit();  // This will submit the form to the server
+            } else {
+                event.preventDefault()
+            }
+        });
+    </script>
+
+</body>
+
+</html>

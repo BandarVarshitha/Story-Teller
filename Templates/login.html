@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css">
+
+    <!-- <style>
+        .navbar {
+            padding:10px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #8f2afa;
+        }
+
+        .nav-link:hover {
+            color:black;
+        }
+
+        .navbar-nav {
+            flex-grow: 1;
+            justify-content: center; /* This centers the nav items */
+            gap:5%;
+            font-weight: bold;
+        }
+        .header{
+            background-color: #8f2afa;
+        }
+        .footer {
+            position:fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color:#8f2afa;
+            color: white;
+            text-align: center;
+        }
+    </style> -->
+</head>
+
+<body>
+
+    <!-- Header -->
+    <nav class="header navbar navbar-expand-lg navbar-light ">
+        <div class="container d-flex justify-content-center"  >
+          <a class="navbar-brand text-white fs-2 h1" href="#">Endless Tales & Adventures</a>
+        </div>
+      </nav>
+
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav  d-flex justify-content-end"> <!-- Added 'mx-auto' to center the items -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('register')}}">SignUp</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div>
+        <form class="changepswd container box p-5 pt-1 col-lg-6" name="loginForm" action="{{url_for('login')}}" method="POST">
+            <h1 class="text-center m-2 mb-4">Login</h1>
+            {% if msg %}
+                <div class="alert alert-danger">
+                    {{ msg }}
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Username</label>
+              <input type="text" class="form-control mt-1 mb-3" id="exampleFormControlInput1" name="username" >
+              <p id="nameError"></p>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput2">Password</label>
+                <input type="password" class="form-control mt-1 mb-3" id="exampleFormControlInput2" name="password" >
+                <p id="pswdError"></p>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+                <button type="submit" id="submit" class="btn text-center" style="background-color: #8f2afa;color:white">Login</button>
+            </div>
+            <div class="mt-3 extra">
+                Don't have an account?<a href="{{url_for('register')}}"> SignUp</a>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer text-center p-2 mt-3">
+            <p>&copy;2024 CopyRight: Online story teller.com</p>
+        </div>
+        
+    <!-- Include Bootstrap 5 JS Bundle without Integrity Hash (For Testing) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+          <!-- <script>
+        document.getElementById("submit").addEventListener("click",function(event){
+            event.preventDefault()
+            const name=document.getElementsByClassName("form-control")[0].value;
+            const pswd=document.getElementsByClassName("form-control")[1].value;
+            if(name === ""){
+                document.getElementById("nameError").style.display="block"
+                document.getElementById("nameError").textContent="Username cannot be empty";
+                return false;
+            }
+            else if(name.length<5){
+                document.getElementById("nameError").style.display="block"
+                document.getElementById("nameError").textContent="Username contains atlest 5 characters";
+                return false;
+
+            }else{
+                document.getElementById("nameError").style.display="none";
+            }
+
+            if(pswd === ""){
+                document.getElementById("pswdError").style.display="block"
+                document.getElementById("pswdError").textContent="password cannot be empty";
+                return false;
+            }else if(newpswd.length<8){
+                document.getElementById("pswdError").style.display="block"
+                document.getElementById("pswdError").textContent="password contains atlest 8 characters";
+                return false;
+            }else{
+                document.getElementById("pswdError").style.display="none";
+            }
+
+            return true;
+            
+        });
+    </script> -->
+    <script>
+        // JavaScript Validation
+        document.getElementById("submit").addEventListener("click", function(event) {
+    const name = document.getElementsByClassName("form-control")[0].value;
+    const pswd = document.getElementsByClassName("form-control")[1].value;
+
+    let isValid = true;
+
+    // Username validation
+    if (name === "") {
+        document.getElementById("nameError").style.display = "block";
+        document.getElementById("nameError").textContent = "Username cannot be empty";
+        isValid = false;
+    } else if (name.length < 5) {
+        document.getElementById("nameError").style.display = "block";
+        document.getElementById("nameError").textContent = "Username must contain at least 5 characters";
+        isValid = false;
+    } else {
+        document.getElementById("nameError").style.display = "none";
+    }
+
+    // Password validation
+    if (pswd === "") {
+        document.getElementById("pswdError").style.display = "block";
+        document.getElementById("pswdError").textContent = "Password cannot be empty";
+        isValid = false;
+    } else if (pswd.length < 8) {
+        document.getElementById("pswdError").style.display = "block";
+        document.getElementById("pswdError").textContent = "Password must contain at least 8 characters";
+        isValid = false;
+    } else {
+        document.getElementById("pswdError").style.display = "none";
+    }
+
+    // If form is valid, submit the form
+    if (isValid) {
+        document.forms["loginForm"].submit();  // Submit the form if validation is successful
+    } else {
+        event.preventDefault();  // If not valid, prevent form submission
+    }
+});
+
+    </script>
+</body>
+
+</html>
